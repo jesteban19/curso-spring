@@ -1,32 +1,17 @@
-package com.udemy.entity;
+package com.udemy.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+public class ContactModel {
 
-@Entity
-@Table(name = "contact")
-public class Contact {
-
-	@Id
-	@GeneratedValue
-	@Column(name="id")
 	private int id;
-	
-	@Column(name="firstname")
+
 	private String firstname;
-	
-	@Column(name="lastname")
+
 	private String lastname;
-	
-	@Column(name="telephone")
+
 	private String telephone;
-	
-	@Column(name="city")
+
 	private String city;
-	
+
 	public int getId() {
 		return id;
 	}
@@ -34,7 +19,7 @@ public class Contact {
 	public void setId(int id) {
 		this.id = id;
 	}
-	
+
 	public String getFirstname() {
 		return firstname;
 	}
@@ -67,9 +52,7 @@ public class Contact {
 		this.city = city;
 	}
 
-	
-
-	public Contact(int id, String firstname, String lastname, String telephone, String city) {
+	public ContactModel(int id, String firstname, String lastname, String telephone, String city) {
 		super();
 		this.id = id;
 		this.firstname = firstname;
@@ -78,6 +61,6 @@ public class Contact {
 		this.city = city;
 	}
 
-	public Contact() {
+	public ContactModel() {
 	}
 }
