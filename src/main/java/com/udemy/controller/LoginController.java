@@ -21,14 +21,13 @@ public class LoginController {
 			@RequestParam(name="logout", required=false) String logout)
 	{
 		LOG.info("METHOD: showLoginForm() -- PARAM: error="+ error + ", logout=" + logout);
-		//model.addAttribute("userCredentials", new UserCredential());
 		model.addAttribute("error", error);
 		model.addAttribute("logout", logout);
 		LOG.info("Returning to login view");
 		return ViewConstant.LOGIN;
 	}
 	
-	@GetMapping({"/loginsuccess", "/"})
+	@GetMapping({"/loginsuccess","/"})
 	public String loginCheck()
 	{
 		LOG.info("METHOD: loginCheck()");

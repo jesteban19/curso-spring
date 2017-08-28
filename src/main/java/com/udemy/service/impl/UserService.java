@@ -29,13 +29,15 @@ public class UserService implements UserDetailsService{
 	@Qualifier("userRepository")
 	private UserRepository userRepository;
 	
+	/* (non-Javadoc)
+	 * @see org.springframework.security.core.userdetails.UserDetailsService#loadUserByUsername(java.lang.String)
+	 */
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		com.udemy.entity.User user = userRepository.findByUsername(username);
-		LOG.info("USER ROLE ===" + user.getUsername());
-		LOG.info("USER ROLE ===" + user.getUserRole());
 		List<GrantedAuthority> authorities = buildAuthorities(user.getUserRole());
-		return buildUser(user, authorities);
+		User userBuilder = buildUser(user, authorities);
+		return userBuilder;
 	}
 	
 	private User buildUser(com.udemy.entity.User user, List<GrantedAuthority> authorities) {

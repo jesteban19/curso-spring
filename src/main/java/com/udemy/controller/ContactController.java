@@ -2,6 +2,9 @@ package com.udemy.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,6 +32,7 @@ public class ContactController {
 	{
 		return "redirect:/contacts/showcontacts";
 	}
+	
 	
 	@GetMapping("/contactform")
 	public String redirectContactForm(@RequestParam(name="id", required=false) int id,
@@ -62,6 +66,9 @@ public class ContactController {
 	public ModelAndView showContacts()
 	{
 		ModelAndView mav = new ModelAndView(ViewConstant.CONTACTS);
+		
+		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		mav.addObject("username", user.getUsername());
 		mav.addObject("contacts", contactService.listAllContacts());
 		return mav;
 	}
